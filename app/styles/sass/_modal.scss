@@ -1,0 +1,226 @@
+.sharePopOver{
+	position: relative;
+	padding: 55px 0px 0px 6px;
+	width: 100%;
+}
+
+.modalShare{
+	padding: 10px 0;
+
+	ul{
+		position:relative;
+
+		li{
+			display: inline-block;
+		}
+
+		span{
+			background:url('../images/share-icon.png') no-repeat;
+			background-position: 0 0;
+			width: 24px;
+			height: 24px;
+			margin: 0 4px 0 0;
+			padding: 0;
+			float:left;
+			 @include transition(all .25s ease);
+
+		}
+	}
+
+	.modalShare__icon_fb{
+		background-position: 0px -29px;
+
+		&:hover{
+			background-position: 0px 0px;
+		}
+	}
+
+	.modalShare__icon_tw{
+		background-position: -28px -29px;
+
+		&:hover{
+			background-position: -28px 0px;
+		}
+	}
+
+	.modalShare__icon_gp{
+		background-position: -56px -29px;
+
+		&:hover{
+			background-position: -56px 0px;
+		}
+	}
+
+	.modalShare__icon_tb{
+		background-position: -112px -29px;
+
+		&:hover{
+			background-position: -112px 0px;
+		}
+	}
+
+	.modalShare__icon_sb{
+		background-position: -84px -29px;
+
+		&:hover{
+			background-position: -84px 0px;
+		}
+	}
+
+}
+
+.modalShareEmail{
+	padding: 5px 7px 0 0;
+
+	p{
+		font-family: oswald, sans-serif, helvetica;
+		font-weight: 200;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		padding: 10px 0px;
+	}
+
+	header{
+		position: relative;
+		height: auto;
+		background: #f5f6f6;
+		z-index: 0;
+	}
+
+	input{
+		height: 30px;
+		padding: 0 0 0 5px;
+		width: 100%;
+		@include border-radius(3px);
+		border: none;
+	}
+
+	footer{
+		padding: 10px 0;
+	}
+
+	textarea{
+		height: 150px;
+		width: 100%;
+		border: 1px solid #d1d3d9;
+		word-break: break-all;
+		@include border-radius(3px);
+		border: none;
+		padding: 6px;
+		font-family: helvetica, sans-serif;
+		font-size: 12px;
+		color: #393d4d;
+
+	}
+}
+
+.modalShareBtns{
+	border-top: 1px solid #ebebed;
+
+		button{
+			@include background(linear-gradient(bottom, #001, #001));
+			border: 1px solid #000011;
+			@include border-radius(3px);
+			color: #fff;
+			display: inline-block;
+			font-size: 13px;
+			padding: 0 13px;
+			height: 30px;
+			margin: 10px 0px;
+			letter-spacing: 1px;
+			font-family: oswald, sans-serif, helvetica;
+			font-weight: 200;
+			cursor: pointer;
+
+		}
+}
+
+#addModal{
+	position: relative;
+	text-align: center;
+	font-family: helvetica, sans-serif, helvetica;
+	font-weight: 200;
+	font-weight: bold;
+	float: left; /* REMOVE ONCE USED AS MODAL*/
+	width: 300px;
+	margin-top: 56px;
+	border: 1px solid #000011;
+	@include border-radius(3px);
+	border: 1px solid #d1d3d9;
+
+
+
+	h2{
+		font-family: oswald, sans-serif, helvetica;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		padding: 8px 2px;
+		color: #444;
+		text-align: left;
+	}
+
+	ul li a{
+		color: #444;
+	}
+
+	ul li{
+		color: #989da6;
+		font-size: 13px;
+		border-bottom: 1px solid #e5e5e5;
+		height: 129px;
+		padding: 25px;
+		background: #fff;
+	}
+
+	header{
+		position: relative;
+		height: auto;
+		background: #f2f2f2;
+		z-index: 0;
+		padding: 0 5px;
+	}
+
+	article{
+		background: #f5f6f6;
+	}
+
+	span{
+		background:url(../images/addIcons.png) no-repeat;
+		margin: 0 auto 22px;
+		display: block;
+	}
+
+	.addModal__web__iconWeb{
+		width: 67px;
+		height: 55px;
+		background-position: -30px -2px;
+	}
+
+	.addModal__upload__iconUpload{
+		width: 76px;
+		height: 55px;
+		background-position: -105px -89px;
+	}
+
+	button{
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 45px;
+		width: 46px;
+		border: none;
+		background: transparent;
+		border-left: 1px solid #D7D7D8;
+	}
+	
+}
+
+.addModal__closeBtn{
+	background:url(../images/addIcons.png) no-repeat;
+	display: block;
+	background-position: -239px -66px;
+	width: 13px;
+	height: 14px;
+	margin-left: 15px;
+	@include opacity(4);
+}

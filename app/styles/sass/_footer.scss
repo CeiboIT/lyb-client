@@ -1,0 +1,133 @@
+.footerBar__container{
+	position: fixed;
+	z-index: 99;
+	bottom: 0px;
+	font-family: $oswald;
+	color: $navLinkColor;
+	padding: 5px 0px;
+}
+
+.footerBar__container_inner{	
+	position: fixed;
+	bottom: -59px;
+	right: 0px;
+	left: 0px;
+	z-index: 80;
+	height: 68px;
+	@include transition(all 0.3s ease-out);
+	box-shadow: 0 0 25px rgba(0, 0, 0, .35);
+}
+
+.footBar__userName{
+	padding: 28px 10px 0 !important;
+}
+
+.footerRiseLow{
+	bottom: 0px;
+	@include transition(all 0.3s ease-in);
+}
+
+.footerRiseHigh{
+	height: 400px;
+}
+
+.footBar__img{
+	display: inline-block;
+	float: left;
+	@include border-radius(50px);
+	height: 50px;
+	margin-top: 9px;
+	margin-left: 26px;
+}
+
+.footerBar__btn{
+	background-image: url('../images/down-arrow.svg');
+	font-size: 15px;
+	right: 4px;
+	top: 7px;
+	height: 30px;
+	width: 30px;
+	position: absolute;
+}
+
+.footerBar__inner{
+	background-color: rgba(0, 0, 0, 1);
+	position: relative;
+	display: inline-block;
+	width: 100%;
+	img{
+		display: inline-block;
+		float: left;
+	}
+	p{
+		color: #fff;
+		display: inline-block;
+		font-weight: 600;
+		padding-top: 5px;
+	}
+}
+
+.footerBar__listed-items{
+	display: inline-block;
+	float: right;
+	font-size: 11px;
+	margin: 0px 0px 0px 15px;
+	font-weight: 600;
+	li{
+		display: inline-block;
+		width: 70px;
+		height: 60px;
+		text-align: center;
+		margin: 12px 8px 0px;
+	}
+	a{
+		color: #fff;
+	}
+}
+
+.followers-icon{
+	background-image: url('../images/followers-icon.svg');
+	@include footerIcons($footerBarIcons);
+}
+
+.followering-icon{
+	background-image: url('../images/following-icon.svg');
+	@include footerIcons($footerBarIcons);
+}
+
+.items-icon{
+	background-image: url('../images/items-icon.svg');
+	@include footerIcons($footerBarIcons);
+}
+
+.profile-icon{
+	background-image: url('../images/profile-icon.svg');
+	@include footerIcons($footerBarIcons);
+}
+
+.settings-icon{
+	background-image: url('../images/settings-icon.svg');
+	@include footerIcons($footerBarIcons);
+}
+
+.likeit-icon{
+	background-image: url('../images/favorite-icon.svg');
+	@include footerIcons($footerBarIcons);
+}
+
+.notification-icon{
+	background-image: url('../images/notification-icon.svg');
+	@include footerIcons($footerBarIcons);
+}
+
+.logOut-icon{
+	background-image: url('../images/logout-icon.svg');
+	@include footerIcons($footerBarIcons);
+}
+
+
+.footerBar__avatar{
+	width: 50px;
+	height: 50px;
+	position: relative;
+}

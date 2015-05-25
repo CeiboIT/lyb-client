@@ -1,0 +1,26 @@
+<section ng-include="'scripts/layout/nav-menu.html'"></section>
+<section class="main profile__container">
+
+<section ng-include="'partials/user-profile-header.html'"></section>
+	<!-- PROFILE ACTIVITY -->
+
+		<section class="l-profile-activity-container">
+
+			<div class="activity-container__overview">
+				<h2>recently viewed items</h2>
+			</div>
+			
+			<!-- PROFILE FEEDS -->
+
+			<ng-include src="'scripts/product-related.html'"></ng-include>
+
+			<div class="activity-container__overview activity-container__lower">
+				<h2>Saved items</h2>
+			</div>
+
+			<div class="l-overview-container l-overview-container-lower">
+			</div>
+			
+		</section>
+</section>
+

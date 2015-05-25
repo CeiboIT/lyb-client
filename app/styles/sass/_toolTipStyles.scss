@@ -1,0 +1,249 @@
+.toolTipContainer{	
+	display: none;
+}
+
+.active{	
+	display: block;
+	@include transition(all 1s ease);
+}
+
+.widget {
+	ul{	
+		width: 100%;
+		margin-left: 8px;
+	}
+
+	li{	
+		display: inline;
+	}
+
+	 a{	
+		color: #000;
+		display: inline-block;
+		width: 23%;
+		padding: 0;
+	}
+     @include toolTipBg($toolTip);
+	 border-bottom: 35px solid #001101;
+
+    &:after {
+         content: "";
+         position: absolute;
+    }
+
+    &:after {
+      @include toolTipTopTriangle($topTriangle);
+    }
+
+}
+
+.widget__innerContainer{	
+	padding: 13px 13px 0;
+	height: 100%;
+}
+
+.widget__title{
+	font-size: 13px;
+}
+
+.widget__facebook{	
+	background: url('../images/facebook.svg') no-repeat;
+	display: block;
+	height: 34px;
+	width: 34px;
+}
+.widget__twitter{	
+	background: url('../images/twitter.svg') no-repeat;
+	height: 20px;
+	width: 20px;
+	margin-top: -29px;
+	display: block;
+}
+
+.widget__gp{	
+	background: url('../images/googlePlus.svg') no-repeat;
+	height: 25px;
+	width: 25px;
+	margin-top: -30px;
+	display: block;
+}
+
+
+.widget__pin{	
+	background: url('../images/pinterest.svg') no-repeat;
+	height: 20px;
+	width: 20px;
+	margin-top: -27px;
+	margin-left: 8px;
+	display: block;
+}
+
+.widget__textarea{	
+	height: 185px;
+	padding-top: 10px;
+	text-align: center;
+	background-color: transparent;
+	@include none-select($none);
+	text-align: left;
+	font-size: 13px;
+	border: none;
+	width: 100%;
+}
+
+
+/***  PRODUCT DESC WIDGET ***/
+
+.widget__p-desc{
+	right: 308px;
+}
+
+.p-view__desc{
+	font-size: 13px;
+	font-weight: 400;
+	span{
+		font-weight: bold;
+	}
+	p{
+		padding-top: 20px;
+		text-align: left;
+		color: grey;
+	}
+}
+
+/***** PROFILE PAGE *****/
+
+.tooltip{
+  text-align: center;
+  //position: relative;
+}
+
+.tooltip:after{
+ position: absolute;
+  content: "";
+  border-top:  30px solid #000;
+  border-bottom:0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  bottom:-20px;
+  left: 50%;
+  margin-left: -50px;
+}
+
+.tip-right{
+	position: absolute !important;
+	top: 0;
+	right: 25px;
+}
+
+
+
+[data-tip] {
+  position: relative;
+}
+
+[data-tip]:after,
+[data-tip]:before {
+  position: absolute;
+  z-index: 100;
+  visibility: hidden;
+  @include opacity(0);
+  @include transition(all .3s linear);
+}
+
+[data-tip]:before {
+  content: "";
+}
+
+[data-tip]:after {
+  content: attr(data-tip);
+  color: #000;
+  font-family: "open sans", helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  padding: 5px 10px;
+  text-align: center;
+  background: rgba(255, 255, 255, .7);
+  @include border-radius(3px);
+  @include box-sizing($box-sizing);
+  width: 120px;
+  max-width: 200px;
+  z-index: 999999999;
+  display: block;
+  line-height: 15px;
+  white-space: normal;
+  overflow: hidden;
+}
+
+[data-tip].tip-top:after {
+  bottom: 100%;
+  margin-bottom: 10px;
+}
+
+[data-tip].tip-top:before {
+  border-top: 7px solid rgba(255, 255, 255, .7);
+  border-bottom: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  top:-10px;
+  left: 2px
+}
+
+[data-tip].tip-right-right:after {
+left: -100%;
+  margin-left: 10px;
+}
+
+[data-tip].tip-right-right:before {
+  top: 5px;
+  left: -10px;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 7px solid #000;
+  border-right: 0;
+  margin-right: 3px;
+}
+
+[data-tip]:hover:after,
+[data-tip]:hover:before {
+  visibility: visible;
+  @include opacity(1);
+}
+
+[data-tip].tip-left:after{
+	left: -7%;
+}
+
+[data-tip].tip-center:after {
+  left: 55%;
+  margin-left: -58px;
+}
+
+[data-tip].tip-center:before {
+  left: 50%;
+  margin-left: -8px;
+}
+
+[data-tip].tip-right:after {
+  right: -11px;
+}
+
+[data-tip].tip-right:before {
+right: -13%;
+}
+
+/***** SIDE BAR TOOL TIP ****/
+
+.tool-tip-notification:after{
+	position: absolute;
+	content: "";
+	border-top:  30px solid #000;
+	border-bottom:0;
+	border-left: 50px solid transparent;
+	border-right: 50px solid transparent;
+}
+
+.tip-note{
+	position: absolute !important;
+	top: 19px;
+	right: 159px;
+}

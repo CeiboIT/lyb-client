@@ -1,0 +1,39 @@
+.profile-list-inner__avtar-details{
+	margin: 0;
+	width: 120px;
+	display: inline-block;
+}
+
+.profile-activity-credentials{
+	margin-top: 40px;
+	display: inline-block;
+	padding-left: 10px;
+	position: relative;
+	vertical-align: top;
+	p{
+		font-size: 12px;
+		margin: 5px 0;
+		color: #fff;
+		font-weight: 400;
+		letter-spacing: 3px;
+	}
+	.profile-name__small{
+		position: relative;
+		top: 0;
+		text-transform: none;
+		font-weight: 400;
+		color: #fff799;
+		&:hover{
+			color: #fff;
+		}
+	}
+}
+
+.l-profile-list-inner{
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	padding-top: 10px;
+	padding-bottom: 10px;
+	position: relative;
+}
+

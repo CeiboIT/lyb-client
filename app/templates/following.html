@@ -1,0 +1,40 @@
+<section ng-include="'partials/nav-menu.html'"></section>
+	<section class="main profile__container">
+	
+	<section ng-include="'partials/user-profile-header.html'"></section>
+		
+		<section class="l-profile-activity-container">
+				
+			<div class="l-profile-list-inner">
+
+				<div class="profile-list-wrappper">
+
+
+					<div class="profile-list-inner__avtar-details pro-credential__avatar">
+						<img src="http://graph.facebook.com/597080585/picture?width=120&amp;height=120" alt="Nate Smithen" class="profile_max150">
+					</div>
+					
+					<div class="profile-activity-credentials">
+
+						<a class="profile-name__small">Nate Smithen</a>
+						<p>125 followers</p>
+
+					</div>
+					
+
+					<a class="follow-button" ng-click="follow=true">
+						<span ng-hide="follow" class="followering-icon followers-icon-inline"></span>
+						<p class="follow-btn-text" ng-hide="follow">Following</p>
+					</a>
+
+					<a class="follow-button" ng-click="follow=false">
+						<span ng-show="follow" class="followers-icon followers-icon-inline"></span>
+						<p class="follow-btn-text" ng-show="follow">unfollow</p>
+					</a>
+				</div>
+
+
+			</div>
+
+		</section>
+	</section>

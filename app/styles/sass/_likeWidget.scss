@@ -1,0 +1,62 @@
+.item__likeBtn__likeWidgetActive{
+	background: url('../images/pattern-5.jpg') #000;
+	width: 100%;
+	height: 60%;
+	display: block;
+	position: fixed;
+	top: 60px;
+	z-index: 9;
+	@include none-select($none);
+	@include transition(all 0.5s ease-in);
+}
+
+.likeWidgetVisable{
+	height: 0;
+	@include transition(all 0.5s ease-out);
+}
+
+.likeWidget__container{
+	margin: 60px auto;
+	@include transition(all 0.50s ease-in);
+	@include opacity(1);
+	width: 50%;
+	padding: 20px;
+	background: #fff;
+	font-family: $oswald;
+	h2{
+		font-size: 19px;
+	}
+}
+
+.likeWidgetVisableContainer{
+	@include transition(all 0.20s ease-out);
+	margin-top: -200px;
+	@include opacity(0);
+}
+
+.likeWidget__container__inner{
+	width: 125px;
+	height: 177px;
+	position: relative;
+	margin-top: 15px;
+	img{
+		width: 100%;
+		border: 1px solid grey;
+	}
+}
+
+.likeWidget__footer{
+	position: relative;
+	bottom: 0;
+	background: #fff799;
+	width: 100%;
+}
+
+.closeLikeWidget__btn{
+	float: right;
+	background: url('../images/close-circle.svg') no-repeat;
+	width: 33px;
+	height: 33px;
+	display: block;
+	margin: 6px;
+}

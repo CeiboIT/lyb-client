@@ -1,0 +1,87 @@
+<div>
+    <header id="l-nav-menu">
+        <a id="logo" href="#/home" alt="logo"></a>
+        <a ng-click="mainNavMenu()" class="nav-menu__container">
+            <span class="nav-menu__hamburger"></span>
+            <p>Menu</p>
+        </a>
+    </header>
+
+    <section ng-include="'partials/nav-menu-widget.html'"></section>
+
+    <section class="menu-widget__wrapper" ng-class="{mainMainVisable: mainWidgetMenu}">
+        <div class="search-input__wrapper" ng-class="{searchWrapperVisable: searchWigetWrapper}">
+            <span class="search-input__icon"></span>
+            <form action="#" method="post" onsubmit="return false;">
+                <input type="text" class="search-form-control focus" data-ta-id="input">
+            </form>
+          
+            <div class="s-placeholder__wrapper">
+                <span class="s-placeholder__icon"></span>
+                <p>Search for your desired items</p>
+            </div>
+        </div>
+
+        <section ng-include="'partials/browse-widget.html'"></section>
+        <section ng-include="'partials/mix-Menu-widget.html'"></section>
+    </section>
+</div>
+
+<section class="footerBar__container">
+    <div class="footerBar__container_inner" 
+         ng-class="{'footerRiseLow': midRaise, 'footerRiseHigh': highRaise }">
+
+         <div class="footerBar__inner">
+            <span class="footerBar__avatar">
+                <img class="footBar__img" src="styles/images/avatar.jpg"/>
+                <p class="footBar__userName">Nate Knows</p>
+            </span>
+      
+            <!-- PROFILE SETTINGS MENU -->
+            <ul class="footerBar__listed-items">
+                <li>
+                    <a href="#/profile">
+                        <span class="profile-icon"></span>
+                        <p>My Profile</p>
+                    </a>
+                </li>
+                <li>
+                    <a ng-class="{active: isActive('/items-menu')}" ng-click="layout.itemMenu()">
+                        <span class="items-icon"></span>
+                        <p>Items</p>
+                        <section ng-include="'partials/items-menu.html'"></section>
+                    </a>
+                </li>
+                <li>
+                    <a ng-click="layout.likeItems()">
+                        <span class="likeit-icon"></span>
+                        <p>Gone for it</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="#/followers">
+                        <span class="followers-icon"></span>
+                        <p>Followers</p>
+                    </a>
+                </li>
+                <li>
+                    <a ng-class="{active: isActive('/following')}" 
+                       ng-click="layout.followeringMenu()">
+                        <span class="followering-icon"></span>
+                        <p>Following</p>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                    <span class="settings-icon"></span>
+                    <p>My Settings</p>
+                  </a>
+                </li>
+               
+            </ul>
+        </div> <!-- footerBar__inner -->
+
+        <section ng-include="'partials/like-items.html'"></section>
+        <section ng-include="'partials/following.html'"></section>
+    </div>
+</section> <!-- footerBar__container -->

@@ -1,0 +1,144 @@
+/** HOME MIXINS **/
+
+@mixin productItemBtnMeasurments($productItemBtn){
+    color: #eee; 
+}
+
+
+@mixin productImg($productImgSize){
+	width: $productImgSize;
+  	height: $productImgSize;
+}
+
+@mixin bottomAndWidth($noMeasureMent){
+	width: $Hundred_PC;
+	bottom: $noMeasureMent;
+}
+
+@mixin homeBtnSize($productImgBtnSize){
+	width: $productImgBtnSize;
+	height: $productImgBtnSize;
+}
+
+/*** STORE MIXINS ***/
+
+@mixin fontProductTitle($letterGothic){
+	font-family: $letterGothic, helvetica,sans-serif;
+	font-size: 35px;
+	font-weight: 600;
+	text-transform: uppercase;
+	color:#7f8c8d;
+}
+
+
+@mixin fontProduct($letterGothic){
+	font-family: $letterGothic, helvetica,sans-serif;
+	font-size: 13px;
+	font-weight: 300;
+	text-transform: uppercase;
+	color:#7f8c8d;
+	font-style: italic;
+}
+
+@mixin fontProductDesc($letterGothic){
+	font-family: $letterGothic, helvetica,sans-serif;
+	font-size: 12px;
+	font-weight: 300;
+	color:#7f8c8d;
+}
+
+@mixin fontProductAccording($letterGothic){
+	font-family: $letterGothic, helvetica,sans-serif;
+	font-size: 15px;
+	font-weight: 400;
+	text-transform: uppercase;
+	color:#000;
+	letter-spacing: 1px;
+}
+
+@mixin product-btns($oswald){
+	font-family: $oswald, helvetica,sans-serif;
+	font-size: 15px;
+	font-weight: 300;
+	text-transform: uppercase;
+	color:#868686;
+	width: $Hundred_PC;
+	text-align: center;
+	line-height: 26px;
+	letter-spacing: 4px;
+}
+
+@mixin product-viewMore($oswald){
+	font-family: $oswald, helvetica,sans-serif;
+	font-size: 13px;
+	font-weight: 300;
+	text-transform: uppercase;
+	color:#868686;
+	line-height: 26px;
+	letter-spacing: 4px;
+}
+
+/*** MIXINS ***/
+
+@mixin box-sizing($box-sizing){
+	-webkit-box-sizing: border-box !important;
+     -moz-box-sizing: border-box !important;
+     -o-box-sizing: border-box !important;
+      box-sizing: border-box !important;
+}
+
+@mixin fontCta($letterGothic){
+	font-family: $oswald;
+	font-size: 19px;
+	color: #fff799;
+}
+
+@mixin fontPriceHome($letterGothic){
+	font-family: $letterGothic, helvetica,sans-serif;
+	font-size: 15px;
+	font-weight: 300;
+	text-transform: uppercase;
+	color:#fff;
+}
+
+@mixin zero($NoMarginAndPadding) {
+	top: $NoMarginAndPadding;
+	left: $NoMarginAndPadding;
+	bottom: $NoMarginAndPadding;
+}
+
+@mixin zeroImportant($NoMarginAndPadding) {
+	top: $NoMarginAndPadding !important;
+	left: $NoMarginAndPadding !important;
+}
+
+@mixin FullwidthAndHeight($Hundred_PC){
+	width: $Hundred_PC;
+	height: $Hundred_PC;
+}
+
+@mixin NoWidthHeight($noMeasureMent){
+	width: $noMeasureMent;
+	height: $noMeasureMent;
+}
+
+@mixin defaultTextAlign($center){
+	text-align: $center;
+}
+
+@mixin navMeasurement($NoMarginAndPadding){
+	top: $noMeasureMent; 
+	bottom: $noMeasureMent;
+}
+
+@mixin NoMarginAndPadding($NoMarginAndPadding){
+	margin: $NoMarginAndPadding;
+	padding: $NoMarginAndPadding;
+}
+
+@mixin transitionNone($none){
+	transition:none !important;
+	-webkit-transition:none !important;
+	-moz-transition:none !important;
+	-o-transition:none !important;
+}

@@ -1,0 +1,162 @@
+#l-nav-menu{
+	position: fixed;
+	z-index: 90;
+	background: rgba(0, 0, 0, 0.9);
+	width: 100%;
+	height: 60px;
+  display: block;
+  font-family: $oswald;
+  font-size: 12px;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0, 0, 0, .35);
+  font-weight: 200;
+  color: $navLinkColor;
+  padding: 5px 0px;
+  @include none-select($none);
+}
+
+button{ 
+  @include none-select($none);
+}
+
+.clearfix{
+  clear:both;
+}
+
+#logo{
+	background: url('../images/LYB_Logo_full.png') no-repeat 12px 6px;
+  width: 59px;
+  height: 50px;
+  display:inline-block;
+  margin: 0 10px;
+  background-size: 33px;
+  float: left;
+}
+
+.nav-background{
+  right: -60%;
+  position: fixed;
+  @include transition(all 0.4s ease-in);
+  height: 100%;
+  top: 60px;
+  width: 200px;
+  display: inline-block;
+  z-index: 9;
+  box-shadow: 0 0 25px rgba(0, 0, 0, .35); 
+}
+
+.navBgVisable{
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  @include transition(all 0.5s ease-in);
+}
+
+.nav-menu__hamburger{
+  background: url('../images/hamburger-menu.svg') no-repeat;
+  display: inline-block;
+  height: 55px;
+  width: 55px;
+}
+
+.nav-menu__container{
+  display: inline-block;
+  cursor: pointer;
+  position: absolute;
+  right: 2px;
+  p{
+    margin-top: -23px;
+    margin-right: 21px;
+    font-weight: 600;
+  }
+}
+
+#navMenu{
+  font-family: $oswald;
+  color: $navLinkColor;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  li{
+    display: block;
+    padding: 8px 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    &:hover{
+      background-color: rgba(255, 255, 255, 0.1);
+      @include transition(all 0.3s ease-in);
+      p{
+        color: #fff799;
+        @include transition(all 0.3s ease-in);
+      }
+      .navMenu__categories-icon{
+        background-image: url('../images/categories-icon-hover.svg');
+        @include menuIcons($MenuBarIcons);
+        @include transition(all 0.3s ease-in);
+      }
+      .navMenu__latest-icon{
+        background-image: url('../images/tag-icon-hover.svg');
+        @include menuIcons($MenuBarIcons);
+        @include transition(all 0.3s ease-in);
+      }
+      .navMenu__mix-icon{
+        background-image: url('../images/record-icon-hover.svg');
+        @include menuIcons($MenuBarIcons);
+        @include transition(all 0.3s ease-in);
+      }
+      .navMenu__search-icon{
+        background-image: url('../images/magnifying-icon-hover.svg');
+        @include menuIcons($MenuBarIcons);
+      }
+    
+      .navMenu__more-icon{
+        background-image: url('../images/more-icon-hover.svg');
+        @include menuIcons($MenuBarIcons);
+        @include transition(all 0.3s ease-in);
+      } 
+      .navMenu__help-icon{
+        background-image: url('../images/support-icon-hover.svg');
+        @include menuIcons($MenuBarIcons);
+        @include transition(all 0.3s ease-in);
+      } 
+    }
+  }
+  li:last-child{
+    border-bottom: none;
+  }
+  p{
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 17px;
+    margin-left: 10px;
+  }
+}
+
+.navMenu__categories-icon{
+  background-image: url('../images/categories-icon.svg');
+  @include menuIcons($MenuBarIcons);
+}
+
+.navMenu__latest-icon{
+    background-image: url('../images/tag-icon.svg');
+    @include menuIcons($MenuBarIcons);
+}  
+
+.navMenu__mix-icon{
+  background-image: url('../images/record-icon.svg');
+  @include menuIcons($MenuBarIcons);
+}
+
+.navMenu__search-icon{
+  background-image: url('../images/magnifying-icon.svg');
+  @include menuIcons($MenuBarIcons);
+}
+
+.navMenu__more-icon{
+  background-image: url('../images/more-icon.svg');
+  @include menuIcons($MenuBarIcons);
+}
+
+.navMenu__help-icon{
+  background-image: url('../images/support-icon.svg');
+  @include menuIcons($MenuBarIcons);
+}

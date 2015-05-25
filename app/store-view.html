@@ -1,0 +1,221 @@
+<section class="product-view-wrapper">
+  
+<div class="l-productView productView__top">
+    <div class="panelCloseBoxImg" ng-click="closeProduct()"></div>
+
+    <div class="productView__header">
+
+<!-- SELLERS AVATOR CREDENTIALS TO BE TAKEN FROM SELLERS AC, THIS WILL SHOWCASE HOW MANY FOLLOWERS 
+THE SELLER HAS AS WELL AS THE QUAUNITY OF ITEMS THEY ARE SELLING -->
+
+      <div class="seller-avator__container">
+          <a href="/"><img src="style/images/avatar.jpg" alt="seller-avator"></a>
+            <ul>
+              <li><a class="seller-avator__username" href="/">YMC</a></li>
+              <li><a href="/">10 Items</a></li>
+              <li><a href="/">8 followers</a></li>
+            </ul>
+      </div>
+      
+<!-- END HERE -->
+
+<!-- THE SECTION ENABLES BUYER TO ACCESS THE PRODUCT DESCRIPTION, 
+      THE CAN LIKE THE ITEM OR SHARE IT TO THEIR SOCIAL PEERS -->
+
+      <div class="productView__menu-container">
+        <ul>
+          <li><a><span class="product-view-product-desc"></span>
+                  <div>Description</div>
+              </a>
+          </li>
+
+           <li>
+            <a><span class="like-it-product-view"></span>
+                <div>Go for it</div>
+            </a>
+          </li>
+
+            <li>
+              <a><span class="share-product-view"></span>
+                <div>Share</div>
+              </a>
+            </li>
+        </ul> 
+     </div>
+
+<!-- END HERE -->
+
+     <!-- SHARE WIDGET -->
+
+     <div class="widget">
+          <div class="widget__innerContainer"> 
+                <span class="widget__title">Sharing is caring</span>
+                
+                <textarea name="share" placeholder="Spread the word..." class="widget__textarea"></textarea>
+          </div>
+          
+            <ul>  
+                <li>
+                  <a><span class="widget__facebook"></span></a>
+               </li>
+
+             <li>
+                  <a><span class="widget__twitter"></span></a>
+            </li>
+
+             <li>
+                 <a><span class="widget__gp"></span></a>
+            </li>
+
+            <li>
+                <a><span class="widget__pin"></span></a>
+            </li>
+        </ul>
+  </div>
+    
+  <!-- WIDGET ENDS HERE -->
+
+  
+  <!-- DESCRIPTION WIDGET -->
+
+     <div class="widget widget__p-desc">
+          
+          <div class="widget__innerContainer"> 
+            
+            <div class="p-view__desc"> 
+              <span>Product Description:</span>
+              <p>Slim rounded sunglasses in blonde tortoise, timeless and preppy, crafted from vintage hand-polished acetate.</p>
+          </div>
+
+      </div>
+                   
+    </div>
+
+  <!--- WIDGET END HERE -->
+
+
+<!-- ITEM CREDENTIALS SUCH AS ITEM NAME, 
+SUB NAME, PRICE AND A LINK TO THE SELLERS STORE -->
+
+      <div class="p_view-title">
+
+          <a class="p_header__crumtrails">Mens/Eyewear/YMC</a>
+
+          <h1>YMC</h1>
+          <p>YMC v Mc Ginn Slim (blonde)</p>
+
+          <div class="productView__p-details">
+            <span class="p-price">
+              €199.99
+            </span>
+            <a href="/" class="product-view__retailerLink">at 
+                <span>YMC</span>
+            </a>
+          </div>
+
+      </div>
+
+<!-- END HERE -->
+
+  </div>
+
+
+
+  <section class="productView-top__mid">
+
+    <div class="productView__gallery">
+
+          <ul rn-carousel rn-carousel-index="slideIndex2" class="my-slider ng-cloak">
+              <li ng-repeat="slide in panel.model.itemImage">
+                  <img ng-src="{{slide.image}}"/>
+              </li>
+          </ul>
+
+          <div class="buyer-retailer-btn__container">
+              <a class="buyer-btn__link" href="/">Buy on store</a>
+          </div>
+
+          <div class="ng-cloak thumbs">
+              <div class="thumb" ng-repeat="slide in panel.model.itemImage" ng-click="$parent.slideIndex2=$index" ng-class="{'is-active': ($parent.slideIndex2==$index)}">
+                   <img ng-src="{{slide.image}}"/>
+              </div>
+          </div>
+
+    </div> 
+
+</section>
+
+<!-- BUTTON TO FOLLOW THE SELLER -->
+
+  <section class="productView_top__btn">
+      
+      <div class="p-btn__container"> 
+        <a href="/" class="p-btn__follow">+ Follow</a>
+        <p>Follow for Sales Alerts from YMC</p>
+    </div>
+
+  </section>
+        
+<!-- ENDS HERE -->
+
+</div>
+
+
+<div class="l-productView ">
+
+     <div class="p_view-title productView__related-items">
+
+          <span>Related Products</span>
+
+    </div>
+
+
+     <section class="row p_view-row">
+            <div ng-repeat="productObject in itemEntry">
+          <div class="miniframe p_view-miniframe">
+            <div class="item">
+              <img class="newItem" ng-src="{{productObject.image}}">
+              <div class="item-overlay">
+                <ul>
+                  <li>
+                    <a>
+                     <div class="item-button item__goForIt" ng-click="likeItBtn()">
+                      <span class="item-button__likeBtn"></span>
+                      <p>Go for it</p>
+                     </div>
+                   </a>
+                 </li>
+                  <li>
+                    <a ng-click="openProduct(productObject)">
+                      <div class="item-button item__chart">
+                        <span class="item-button__viewBtn"></span>
+                           <p class="item-button__viewBtn-copy">View</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <div class="item-button item__share">
+                        <span class="item-button__shareBtn"></span>
+                        <p>Share</p>
+                      </div>
+                    </a>
+                  </li>
+              </ul>
+                <footer>
+                      <div class="item-top-title">
+                        <h2>{{productObject.productTitle}}</h2>
+                        <p class="subdescription">{{productObject.productDesc}}</p>
+                        <div class="item__stats"></div>
+                      </div>
+                </footer>
+              </div>
+        </div>
+        </section>
+</div>
+
+
+</section>
+		
+
+

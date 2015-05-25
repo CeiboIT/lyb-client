@@ -1,0 +1,53 @@
+<section ng-include="'./app/partials/nav-menu.html'"></section>
+<section class="main"> 
+  <span ng-class="{lightouts: siteBlackout}"></span>
+      <section class="row">
+        <div ng-repeat="productObject in itemEntry">
+      <div class="miniframe">
+        <div class="item">
+          <img class="newItem" ng-src="{{productObject.image}}">
+          <div class="item-overlay">
+            <ul>
+              <li>
+                <a>
+                 <div class="item-button item__goForIt" ng-click="likeItBtn()">
+                  <span class="item-button__likeBtn"></span>
+                  <p>Go for it</p>
+                 </div>
+               </a>
+             </li>
+              <li>
+                <a ng-click="openProduct(productObject)">
+                  <div class="item-button item__chart">
+                    <span class="item-button__viewBtn"></span>
+                       <p class="item-button__viewBtn-copy">View</p>
+                  </div>
+                </a>
+              </li>
+              <li>
+                <a>
+                  <div class="item-button item__share">
+                    <span class="item-button__shareBtn"></span>
+                    <p>Share</p>
+                  </div>
+                </a>
+              </li>
+          </ul>
+            <footer>
+                  <div class="item-top-title">
+                    <h2>{{productObject.productTitle}}</h2>
+                    <p class="subdescription">{{productObject.productDesc}}</p>
+                    <div class="item__stats"></div>
+                  </div>
+            </footer>
+          </div>
+    </div>
+    </section>
+
+    <!-- PRODUCT VIEW OBJECT -->
+    <section class="panel" ng-class="{open: panel.open}">
+        <div class="loading" ng-show="!panel.partial">Loading...</div>
+        <div class="content" ng-include="panel.partial"></div>
+    </section>
+   <!-- SHARE OBJECT -->
+  </section>

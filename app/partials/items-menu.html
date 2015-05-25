@@ -1,0 +1,21 @@
+<section>
+	<div ng-class="{itemsWrapper: itemsVisble}" class="item-widget__container">
+		<ul>
+			<li class="item-widget-icon-listed" 
+				ng-repeat="productObject in itemEntry | limitTo: 4">
+				<a class="item-widget-icon" href="">
+					<div class="widget-icone__content-holder">
+						<img class="newItem" ng-src="{{productObject.image}}">
+					</div>
+					
+					<div class="widget-icone__content-holder widget-larger-section">
+	              		<div class="item-widget-title">
+				            <h2>{{productObject.productTitle}}</h2>
+				            <p class="subdescription">{{productObject.productDesc}}</p>
+	                  </div>
+	                </div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</section>

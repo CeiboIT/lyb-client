@@ -1,0 +1,6 @@
+<!-- PRODUCT VIEW OBJECT -->
+<span ng-class="{lightouts: siteBlackout}"></span>
+<section class="panel" ng-class="{open: panelView.state.open}">
+    <div class="loading" ng-show="!panelView.content">Loading...</div>
+    <div class="content" ng-include="panelView.content"></div>
+</section>

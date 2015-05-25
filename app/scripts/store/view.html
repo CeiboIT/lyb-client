@@ -1,0 +1,95 @@
+<div class="modal-body">
+
+    <section class="product-view-wrapper">
+  
+    <div class="l-productView productView__top">
+        <div class="panelCloseBoxImg" ng-click="closeProduct()"></div>
+        <div class="productView__header">
+            <!-- SELLERS AVATOR CREDENTIALS TO BE TAKEN FROM SELLERS AC, THIS WILL SHOWCASE HOW MANY FOLLOWERS 
+                THE SELLER HAS AS WELL AS THE QUAUNITY OF ITEMS THEY ARE SELLING -->
+            <ng-include src="'scripts/store/seller.html'"></ng-include>
+            <!-- END HERE -->
+
+            <!-- THE SECTION ENABLES BUYER TO ACCESS THE PRODUCT DESCRIPTION, 
+                THE CAN LIKE THE ITEM OR SHARE IT TO THEIR SOCIAL PEERS -->
+            <ng-include src="'scripts/store/product_view.html'"></ng-include>
+            <!-- END HERE -->
+
+            <!-- SHARE WIDGET -->
+            <ng-include src="'scripts/store/sharing_widget.html'"></ng-include>    
+            <!-- WIDGET ENDS HERE -->
+
+            <!-- DESCRIPTION WIDGET -->
+            <ng-include src="'scripts/store/description_widget.html'"></ng-include>
+            <!--- WIDGET END HERE -->
+
+            <!-- ITEM CREDENTIALS SUCH AS ITEM NAME, SUB NAME, PRICE AND A LINK TO THE
+              SELLERS STORE -->
+            <ng-include src="'scripts/store/item_credentials.html'"></ng-include>
+            <!-- END HERE -->
+        </div> <!-- productView__header -->
+
+        <section class="productView-top__mid">
+          <ng-include src="'scripts/store/gallery.html'"></ng-include>
+        </section>
+
+        <!-- BUTTON TO FOLLOW THE SELLER -->
+
+        <section class="productView_top__btn">
+          <div class="p-btn__container"> 
+            <a href="/" class="p-btn__follow">+ Follow</a>
+            <p>Follow for Sales Alerts from YMC</p>
+          </div>
+        </section>
+        <!-- ENDS HERE -->
+    </div> <!-- productView__top -->
+
+    <div class="l-productView">
+      <div class="p_view-title productView__related-items">
+          <span>Related Products</span>
+      </div>
+      <section class="row p_view-row">
+        <div ng-repeat="productObject in itemEntry">
+          <div class="miniframe p_view-miniframe">
+            <div class="item">
+              <img class="newItem" ng-src="{{productObject.image}}">
+              <div class="item-overlay">
+                <ul>
+                  <li>
+                    <a>
+                     <div class="item-button item__goForIt" ng-click="likeItBtn()">
+                      <span class="item-button__likeBtn"></span>
+                      <p>Go for it</p>
+                     </div>
+                   </a>
+                 </li>
+                  <li>
+                    <a ng-click="openProduct(productObject)">
+                      <div class="item-button item__chart">
+                        <span class="item-button__viewBtn"></span>
+                           <p class="item-button__viewBtn-copy">View</p>
+                      </div>
+                    </a>
+                  </li>
+                  <li>
+                    <a>
+                      <div class="item-button item__share">
+                        <span class="item-button__shareBtn"></span>
+                        <p>Share</p>
+                      </div>
+                    </a>
+                  </li>
+              </ul>
+                <footer>
+                      <div class="item-top-title">
+                        <h2>{{productObject.productTitle}}</h2>
+                        <p class="subdescription">{{productObject.productDesc}}</p>
+                        <div class="item__stats"></div>
+                      </div>
+                </footer>
+              </div>
+        </div>
+        </section>
+</div>
+</section>		
+</div>

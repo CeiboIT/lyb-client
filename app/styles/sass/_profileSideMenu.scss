@@ -1,0 +1,31 @@
+.l-profile-side-menu{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: 86px;
+	height: 100%;
+	background-color: rgba(255, 255, 255, .2);
+	right: 0;
+	font-family: "open sans", helvetica, sans-serif;
+	font-size: 12px;
+	text-align: center;
+}
+
+.profile-side_nav-container{
+	position: relative;
+	top: 0%;
+	ul{
+	}
+	li{
+		padding: 10px;
+		border-bottom: 1px solid rgba(255, 255, 255, .1);
+		position: relative;
+	}
+	p{
+		color: #fff;
+	}
+}
+
+.profile-side__first-li{
+	border-top: 1px solid rgba(255, 255, 255, .1);
+}			

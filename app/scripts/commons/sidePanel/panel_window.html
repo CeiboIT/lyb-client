@@ -1,0 +1,9 @@
+<section modal-render="{{$isRendered}}" tabindex="-1" role="dialog" class="panel"
+    modal-animation-class="fade"
+	ng-class="{in: animate, open: $isRendered}" 
+	ng-style="{'z-index': 1050 + index*10, display: 'block'}" 
+	ng-click="close($event)">
+    <div class="modal-dialog" ng-class="size ? 'modal-' + size : ''">
+      <div class="modal-content" modal-transclude></div>
+    </div>
+</section>

@@ -1,0 +1,24 @@
+
+@media screen and (min-width: 1000px){
+	.span_1_of_4 {
+		width: 19%;
+	}
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+	.span_1_of_4 {
+		width: 23.8%; 
+	}
+}
+
+@media screen and (min-width: 600px) and (max-width: 800px) {
+	.span_1_of_4 {
+		width: 49%; 
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.span_1_of_4 {
+		width: 100%; 
+	}
+}

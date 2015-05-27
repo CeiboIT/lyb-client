@@ -1,13 +1,14 @@
+<div class="panelCloseBoxImg" ng-click="view.cancel()"></div>
 <div class="l-productView">
   <div class="productView__half">
-    <img class="productView__img" src="http://cdn.colette.fr/media/catalog/product/cache/1/image/500x/9df78eab33525d08d6e5fb8d27136e95/0/0/0000011482222_img_3576-copie.jpg" alt="seller-avator">
+    <img class="productView__img" ng-src="{{view.product.images[0].content}}" alt="seller-avator">
     <div class="l-productView-details">
       
       <ng-include src="'scripts/product/p_view-title.html'"></ng-include>
       <ng-include src="'scripts/product/product-view__elements.html'"></ng-include>
       
       <p class="productView__desc">
-        The prolific Marcelo Burlon, omnipresent in domains as vast as design, photography, clubbing or art direction, presents his new collection of clothes, drawing iconographic elements from different cultures (Mapuche and Tehuelche) and even esoterism.
+        {{view.product.description}}
       </p>
       
       <ul class="productView__btns">

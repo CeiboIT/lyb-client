@@ -1,5 +1,5 @@
 <div class="item">
-  <img class="newItem" ng-src="{{product.image}}">
+  <img class="newItem" ng-src="{{product.images[0].content}}">
   <div class="item-overlay">
     <ul>
       <li>
@@ -29,8 +29,8 @@
     </ul>
     <footer>
       <div class="item-top-title">
-        <h2>{{product.productTitle}}</h2>
-        <p class="subdescription">{{product.productDesc}}</p>
+        <h2>{{product.name}}</h2>
+        <p class="subdescription">{{product.description}}</p>
         <div class="item__stats"></div>
       </div>
     </footer>

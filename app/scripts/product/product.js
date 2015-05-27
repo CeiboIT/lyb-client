@@ -22,10 +22,16 @@
 
 	}]);
 
-	Product.controller('ProductDetailController', ['$log', function ($log, product) {
+	Product.controller('ProductDetailController', 
+		['$log', '$modalInstance', 'product', function ($log, $modalInstance, product) {
 		var controller = this;
 		controller.product = product;
 		
+		controller.cancel = function () {
+			$log.debug('ProductDetailController > cancel');
+    		$modalInstance.dismiss('cancel');
+  		};
+
 		controller.buyOnStore = function (product) {
 			$log.debug('ProductDetailController > buyOnStore > ' + product);
 		};
@@ -35,7 +41,7 @@
 	Product.factory('productViewService', 
 		['$templateCache', 'sidePanelService', function ($templateCache, sidePanelService) {
 
-		return function productViewPanel(product) {
+		return function productViewService(product) {
 			sidePanelService.open({
 				template: $templateCache.get('product_detail'),
 				controller: 'ProductDetailController',
@@ -49,10 +55,23 @@
 		};
 	}]);
 
+	Product.factory('productService', ['$log', 'restConfig', function($log, restConfig) {
+		var service = restConfig.getRestForEntity('products');
+		var productService = {
+			getAll: function () {
+				return service.getList();
+			}
+		};
+		return productService;
+	}]);
+
 	Product.directive('productView', 
 		['$templateCache', 'productViewService', function ($templateCache, productViewService) {
 		return {
 			restrict: 'E',
+			scope: {
+				product: '='
+			},
 			template: $templateCache.get('product_list_item'),
 			controller: function() {
 				var controller = this;

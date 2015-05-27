@@ -4,11 +4,16 @@
     var Home = angular.module('lyb.home', []);
     
     Home.controller('HomeController', 
-        [function () {
+        ['$log', 'productService', function ($log, productService) {
 
         var homeController = this;
 
-        homeController.itemEntry = itemEntryCollection;
+        productService.getAll()
+        	.then(function (response){
+        		homeController.itemEntry = response;
+        	});
+
+        // homeController.itemEntry = itemEntryCollection;
         
     }]);
 

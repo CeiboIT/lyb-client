@@ -5,10 +5,13 @@
 	 angular
 		.module('lybApp', 
 			['ui.router', 'ui.bootstrap', 'lyb.home', 'product', 'layout', 'helper',
-			'sidePanel' ])
-		.config(['$urlRouterProvider', '$stateProvider', 
-			function($urlRouterProvider, $stateProvider) {
+			'sidePanel', 'ceiboIT.restServices' ])
+
+		.config(['$urlRouterProvider', '$stateProvider', 'restConfigProvider',
+			function($urlRouterProvider, $stateProvider, restConfigProvider) {
 			
+			restConfigProvider.setBaseUrl('/api');
+
 			$urlRouterProvider.otherwise('/');
 
 			$stateProvider

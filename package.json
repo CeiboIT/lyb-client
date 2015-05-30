@@ -39,7 +39,7 @@
     "socket.io": "0.9.6"
   },
   "engines": {
-    "node": ">=0.10.0"
+    "node": "0.12.x"
   },
   "scripts": {
     "test": "grunt test",

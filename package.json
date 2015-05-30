@@ -39,6 +39,7 @@
   },
   "scripts": {
     "test": "grunt test",
-    "postinstall": "./node_modules/grunt/bin/grunt serve"
+    "postinstall": "bower install && grunt serve"
+"
   }
 }

@@ -1,12 +1,12 @@
 <div class="p_view-title">
-  <h1>YMC</h1>
-  <p>YMC v Mc Ginn Slim (blonde)</p>
+  <h1>{{view.product.store.name}}</h1>
+  <p>{{view.product.description}}</p>
   <div class="productView__p-details">
     <span class="p-price">
-      €199.99
+      ${{view.product.price}}
     </span>
     <a href="/" class="product-view__retailerLink">at
-      <span>{{view.product.description}}</span>
+      <span>{{view.product.store.name}}</span>
     </a>
   </div>
 </div>

@@ -3,7 +3,7 @@
 
 	var Layout = angular.module('layout', []);
 
-	Layout.controller('LayoutController', function () {
+	Layout.controller('LayoutController', ['$state', function ($state) {
 		var layout = this;
 
         layout.itemEntry = itemEntryCollection;
@@ -19,6 +19,7 @@
             layout.itemsVisble = !layout.itemsVisble;
             layout.highRaise = false;
             layout.navBgWrapper = false;
+            $state.go('home');
         };
 
 		layout.mainNavMenu = function (){
@@ -37,5 +38,5 @@
             layout.navBgWrapper = false;
         };
                 
-	});
+	}]);
 }());

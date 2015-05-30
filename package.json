@@ -1,7 +1,9 @@
 {
   "name": "lybclient",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "karma": "^0.12.35"
+  },
   "repository": {},
   "devDependencies": {
     "grunt": "^0.4.5",

@@ -317,9 +317,16 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    // concat: {
-    //   dist: {}
-    // },
+    concat: {
+       js: {
+          src: '<%= yeoman.app %>/scripts/{,*/}*.js',
+          dest: 'dist/dest/js/concat.js'
+        },
+      css: {
+          src: '<%= yeoman.app %>/styles/{,*/}*.{scss,sass}',
+          dest: 'dist/dest/css/concat.css'
+      }
+    },
 
     imagemin: {
       dist: {
@@ -420,7 +427,7 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       // server: [
-      //   'copy:styles'
+        // 'copy:styles'
       // ],
       // test: [
       //   'copy:styles'
@@ -490,9 +497,9 @@ module.exports = function (grunt) {
     'concat',
     'ngAnnotate',
     'copy:dist',
-    'cdnify',
+    // 'cdnify',
     'cssmin',
-    'uglify',
+    // 'uglify',
     'filerev',
     'usemin',
     'htmlmin'

@@ -74,7 +74,7 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       proxies: [
@@ -317,16 +317,16 @@ module.exports = function (grunt) {
     //     }
     //   }
     // },
-    concat: {
-       js: {
-          src: '<%= yeoman.app %>/scripts/{,*/}*.js',
-          dest: 'dist/dest/js/concat.js'
-        },
-      css: {
-          src: '<%= yeoman.app %>/styles/{,*/}*.{scss,sass}',
-          dest: 'dist/dest/css/concat.css'
-      }
-    },
+    // concat: {
+    //    js: {
+    //       src: '<%= yeoman.app %>/scripts/{,*/}*.js',
+    //       dest: 'dist/scripts/concat.js'
+    //   },
+    //   css: {
+    //       src: '<%= yeoman.app %>/styles/{,*/}*.{scss,sass}',
+    //       dest: 'dist/dest/css/concat.css'
+    //   }
+    // },
 
     imagemin: {
       dist: {
@@ -362,7 +362,7 @@ module.exports = function (grunt) {
         files: [{
           expand: true,
           cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html'],
+          src: ['*.html', 'templates/{,*/}*.html', 'views/{,*/}*.html', 'scripts/{,*/}*.html' ],
           dest: '<%= yeoman.dist %>'
         }]
       }
@@ -400,9 +400,12 @@ module.exports = function (grunt) {
             '*.{ico,png,txt}',
             '.htaccess',
             '*.html',
+            'scripts/{,*/}*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'styles/fonts/{,*/}*.*'
+            'styles/fonts/{,*/}*.*',
+            'styles/images/{,*/}*.*',
+            'partials/{,*/}*.html'
           ]
         }, {
           expand: true,

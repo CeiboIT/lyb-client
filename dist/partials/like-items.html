@@ -1,0 +1,31 @@
+<div class="likeItBar__container"> 
+	
+	<div class="likeItBar__top">
+		<nav class="likeItBar__nav">
+			<a>Dream list</a>
+			<a>Birthday list</a>
+			<a>Gifts for my girlfriend</a>
+		</nav>
+	</div>
+
+	<div class="likeItBar__btm">
+		<ul>
+			<li class="like-widget-icon-listed" 
+			    ng-repeat="productObject in layout.itemEntry | limitTo: 12">
+				<span class="likeIt__closeBtn"></span>
+				<a class="like-widget-icon" href="">
+					<div class="like-widget-icon__content-holder">
+						<img class="newItem" ng-src="{{productObject.image}}">
+					</div>
+					
+					<div class="likeIt-icon__content-holder widget-larger-section">
+	              		<div class="likeIt-widget-title">
+				            <h2>{{productObject.productTitle}}</h2>
+				            <p class="subdescription">{{productObject.productDesc}}</p>
+	                  </div>
+	                </div>
+				</a>
+			</li>
+		</ul>
+	</div>
+</div>

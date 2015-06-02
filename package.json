@@ -43,6 +43,6 @@
   },
   "scripts": {
     "test": "grunt test",
-    "postinstall": "bower install && node app.js"
+    "postinstall": "node app.js"
   }
 }

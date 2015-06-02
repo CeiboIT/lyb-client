@@ -19,12 +19,20 @@
 
 	app.use(express.static(__dirname + '/dist'));
 	// // app.use(express.static(__dirname + '/.tmp/'));
+
+    proxy.on('error', function (err, req, res) {
+    	console.log('error' + err);
+    	console.log('req' + req);
+    	console.log('res' + res);
+  	});
+
 	app.all('/api/*', function (req, res) { 
 		console.log('old request url ' + req.url);
     	req.url = '/' + req.url.split('/').slice(2).join('/'); // remove the '/api' part
     	console.log('new request url ' + req.url);
-        // return proxy.web(req, res, { target: 'https://secret-meadow-5568.herokuapp.com' });
-        return proxy.proxyRequest(req, res, { target: 'http://201.255.96.130:3000' });
+	    req.headers.host = 'secret-meadow-5568.herokuapp.com';
+        return proxy.proxyRequest(req, res, { target: 'https://secret-meadow-5568.herokuapp.com' });
+        // return proxy.proxyRequest(req, res, { target: 'http://190.16.207.199:3000' });
 	});
 	app.listen(process.env.PORT || 9009);
 	 

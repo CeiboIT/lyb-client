@@ -38,7 +38,6 @@
     "node": "0.12.x"
   },
   "scripts": {
-    "test": "grunt test",
-    "postinstall": "node app.js"
+    "test": "grunt test"
   }
 }

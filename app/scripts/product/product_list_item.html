@@ -1,10 +1,17 @@
 <div class="item">
-  <img class="newItem" ng-src="{{product.images[0].content}}">
+  <img class="newItem" 
+       ng-if="product.images[0].content"
+       ng-src="{{product.images[0].content}}">
+
+  <img class="newItem" 
+       ng-if="!product.images.length"
+       ng-src="styles/images/product-default.png">
+
   <div class="item-overlay">
     <ul>
       <li>
         <a>
-          <div class="item-button item__goForIt" ng-click="homeController.likeItBtn()">
+          <div class="item-button item__goForIt" ng-click="productController.likeIt(product)">
             <span class="item-button__likeBtn"></span>
             <p>Go for it</p>
           </div>

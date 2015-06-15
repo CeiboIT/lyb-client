@@ -5,12 +5,16 @@
 	 angular
 		.module('lybApp', 
 			['ui.router', 'ui.bootstrap', 'lyb.home', 'product', 'layout', 'helper',
-			'sidePanel', 'ceiboIT.restServices' ])
+			'sidePanel', 'ceibo.auth', 'ceibo.login', 'ceiboIT.restServices', 'profile', 
+			'ngFacebook'])
 
-		.config(['$urlRouterProvider', '$stateProvider', 'restConfigProvider',
-			function($urlRouterProvider, $stateProvider, restConfigProvider) {
+		.config(['$urlRouterProvider', '$stateProvider', 'restConfigProvider', '$httpProvider',
+			function($urlRouterProvider, $stateProvider, restConfigProvider, $httpProvider) {
 			
 			restConfigProvider.setBaseUrl('/api');
+			// $httpProvider.interceptors.push('responseErrorInterceptor');
+			$httpProvider.defaults.withCredentials = true;
+    		$httpProvider.interceptors.push('authInterceptor');
 
 			$urlRouterProvider.otherwise('/');
 
@@ -21,23 +25,9 @@
 					controller: 'LayoutController',
 					controllerAs: 'layout'
 				})
-				.state('home' , {
-					parent: 'layout',
-					url: '/',
-					templateUrl: 'scripts/home/home.html',
-					controller:  'HomeController',
-					controllerAs: 'homeController'
-				})
 				.state('view' , {
-					// parent: 'layout',
 					url: '/view',
 					templateUrl: 'templates/view.html',
-				})
-				.state('profile' , {
-					parent: 'layout',
-					url: '/profile',
-					templateUrl: 'templates/profile.html'
-					//controller:  'footerCtrl'
 				})
 				.state('following' , {
 					parent: 'layout',
@@ -157,7 +147,7 @@
 				backdropClass: 'lightouts'
 			};
 			angular.extend(defaultOptions, options);
-			$modal.open(defaultOptions);
+			return $modal.open(defaultOptions);
         };
         
 	    return sidePanel;
@@ -169,7 +159,8 @@
 
 	var Layout = angular.module('layout', []);
 
-	Layout.controller('LayoutController', ['$state', function ($state) {
+	Layout.controller('LayoutController', ['$state', 'authService', 
+        function ($state, authService) {
 		var layout = this;
 
         layout.itemEntry = itemEntryCollection;
@@ -203,6 +194,10 @@
             layout.itemsVisble = false;
             layout.navBgWrapper = false;
         };
+
+        layout.logout = function () {
+            authService.facebookLogout();
+        };
                 
 	}]);
 }());
@@ -211,7 +206,20 @@
     'use strict';
 
     var Home = angular.module('lyb.home', []);
-    
+
+    Home.config(['$stateProvider', function ($stateProvider) {
+        $stateProvider.state('home' , {
+            parent: 'layout',
+            url: '/',
+            templateUrl: 'scripts/home/home.html',
+            controller:  'HomeController',
+            controllerAs: 'homeController',
+            data: {
+                loggedIn: false
+            }
+        });
+    }]);
+
     Home.controller('HomeController', 
         ['$log', 'productService', function ($log, productService) {
 
@@ -221,9 +229,7 @@
         	.then(function (response){
         		homeController.itemEntry = response;
         	});
-
         // homeController.itemEntry = itemEntryCollection;
-        
     }]);
 
 } ());
@@ -360,19 +366,6 @@ var itemEntryCollection = [
 		loadTemplate('scripts/product/product_list_item.html', 'product_list_item');
 	}]);
 
-	Product.factory('productActions', ['$log', function ($log) {
-		var actions = {};
-		
-		actions.likeIt = function (product) {
-			$log.debug('likeIt > ' + JSON.stringify(product));
-		};
-
-		actions.shareIt = function (product) {
-			$log.debug('shareIt > ' + JSON.stringify(product));
-		};
-
-	}]);
-
 	Product.controller('ProductDetailController', 
 		['$log', '$modalInstance', 'product', function ($log, $modalInstance, product) {
 		var controller = this;
@@ -406,32 +399,283 @@ var itemEntryCollection = [
 		};
 	}]);
 
-	Product.factory('productService', ['$log', 'restConfig', function($log, restConfig) {
+	Product.factory('productService', ['$log', 'restConfig', 'authService',
+		function($log, restConfig) {
 		var service = restConfig.getRestForEntity('products');
-		var productService = {
+		var productService = { // only provide a subset of operations
 			getAll: function () {
 				return service.getList();
+			},
+			likeIt: function (product) {
+				product.post('like');
+			},
+			shareIt: function (product) {
+				$log.debug('shareIt > ' + JSON.stringify(product));
 			}
 		};
 		return productService;
 	}]);
 
+	Product.controller('productViewController', ['productViewService', 'productService',
+		function (productViewService, productService) {
+			var productViewController = this;
+			productViewController.openProduct = function (product) {
+				productViewService(product);
+			};
+			productViewController.likeIt = function (product) {
+	            productService.likeIt(product);
+	        };
+	}]);
+
 	Product.directive('productView', 
-		['$templateCache', 'productViewService', function ($templateCache, productViewService) {
+		['$templateCache', 'productViewService', function ($templateCache) {
 		return {
 			restrict: 'E',
 			scope: {
 				product: '='
 			},
 			template: $templateCache.get('product_list_item'),
-			controller: function() {
-				var controller = this;
-				controller.openProduct = function (product) {
-					productViewService(product);
-				};
-			},
+			controller: 'productViewController',
 			controllerAs: 'productController'
 		};
 	}]);
 
+}());
+(function () {
+    'use strict';
+
+    var AuthService = angular.module('ceibo.auth', ['ngFacebook']);
+    
+    AuthService.factory('authInterceptor', 
+        ['$q', '$injector', '$log',
+        function ($q, $injector, $log) {
+        return {
+            responseError: function (response) {
+                if(response.status === 403 || response.status === 401) {
+                    $log.debug('403 returned');
+                    $injector.get('loginView')();
+                    // $injector.get('$state').go('login');
+                }
+                return $q.reject(response);
+            }
+        };
+    }]);
+    
+    AuthService.run([ '$rootScope', 'authorization', 'identityService', 
+        function($rootScope, authorization, identityService) {
+        // escucha por cambios en la url/states
+        $rootScope.$on('$stateChangeStart', function(event, toState, toStateParams) {
+            $rootScope.toState = toState;
+            $rootScope.toStateParams = toStateParams;
+            authorization.authorize(event);
+        });
+        identityService.restoreUser();
+    }]);
+
+    AuthService.factory('identityService', ['$log', '$window',
+        function ($log, $window) {
+        var identity = false,
+            identityService = {
+                setIdentity: function (newIdentity) {
+                    identity = newIdentity;
+                    var identityJson = angular.toJson(newIdentity);
+                    $log.debug('userIdentity: ' + identityJson);
+                    $window.sessionStorage.setItem('lyb.identity', identityJson);
+                },
+                removeIdentity: function () {
+                    identity = undefined;
+                    $window.sessionStorage.removeItem('lyb.identity');
+                },
+                getUserIdentity: function () {
+                    // recupera la identity del user, si no, lanza un reject para ser manejado por el caller.
+                    // Devuelve una promise por si hay que re-loginiar al user.
+                    // var deferred = $q.defer();
+                    return identity || this.restoreUser();
+                    // if (identity) {
+                    //     deferred.resolve(identity);
+                    // } else {
+                    //     deferred.reject({ error: 'Not logged user'});
+                    // }
+                    // return deferred.promise;
+                },
+                restoreUser: function () {
+                    // recupera la identity del usuario desde sessionStorage.
+                    var saved = $window.sessionStorage.getItem('lyb.identity');
+                    if (saved) {
+                        $log.debug('user restored ' + saved);
+                        return angular.fromJson(saved);
+                    }
+                    return false; // no estaba la identity en la sesion
+                },
+                isAuthenticated: function() {
+                    return identity || this.restoreUser();
+                }
+            };
+            return identityService;
+    }]);
+
+    AuthService.factory('authService', 
+        ['$window', '$state', '$http', '$facebook', 'identityService', 
+        function ($window, $state, $http, $facebook, identityService) {
+        var auth = {
+            facebookLogin: function () {
+                return $facebook.login()
+                    .then(function() {
+                        $facebook.api('/me').then( 
+                            function(response) {
+                                identityService.setIdentity(response);
+                            });
+                        return $facebook.getLoginStatus()
+                            .then(function (response) {
+                                if (response.status === 'connected') {
+                                    var accessToken = response.authResponse.accessToken;
+                                    $http.defaults.headers.common['access_token'] = accessToken;
+                                    return response;
+                                }});
+                        });
+
+            }, 
+            facebookLogout: function () {
+                $http.post('/api/auth/logout');
+                identityService.removeIdentity();
+                return $facebook.logout();
+            },
+            getUser: function () {
+                var user = $window.sessionStorage.getItem('lyb.identity');
+                return JSON.parse(user);
+            }
+        };
+        return auth;
+    }]);
+
+    AuthService.config(["$facebookProvider", function($facebookProvider) {
+        $facebookProvider.setAppId('822272877864083');
+    }]);
+
+    AuthService.run([function() {
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) {
+                    return;
+                }
+            js = d.createElement(s); js.id = id;
+            js.src = '//connect.facebook.net/en_US/sdk.js';
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+    }]);
+
+    AuthService.factory('authorization', 
+        ['$rootScope', '$state', '$log', 'identityService', 'loginView',
+        function($rootScope, $state, $log, identityService, loginView) {
+            /* Authorize every state transition */
+            var canIGoToTheState = function (toState) {
+                if (toState.data && toState.data.loggedIn) {
+                    return identityService.getUserIdentity();
+                }
+                return true;
+            };
+            return {
+                authorize: function(event) {
+                    $log.debug('trying to transition to state: ' + $rootScope.toState.name);
+                    if (!canIGoToTheState($rootScope.toState)) {
+                        $log.debug('the user can not go to the state: ' + $rootScope.toState.name);
+                        // save the state they wanted before redirect him to signin state
+                        $log.debug('because it is not authenticated');
+                        $rootScope.returnToState = $rootScope.toState; 
+                        $rootScope.returnToStateParams = $rootScope.toStateParams;
+                        if (event) { event.preventDefault(); }
+                        loginView();
+                        // $state.go('login'); // now, send them to the signin state so they can log in
+                    }
+                }   
+            };
+    }]);
+}());
+(function () {
+    'use strict';
+
+    var Login = angular.module('ceibo.login', ['restangular']);
+
+    // Login.run(['loadTemplate', function (loadTemplate) {
+    //     loadTemplate('scripts/security/login.html', 'login');
+    // }]);
+
+    Login.config(['$stateProvider', function ($stateProvider) {
+        $stateProvider.state('login', {
+            url: '/login',
+            // controller: 'LoginControllerView',
+            data: {
+                loggedIn: false
+            },
+            onEnter: ['loginView', function (loginView) {
+                loginView();
+            }]
+            // templateUrl: 'scripts/security/login.html'
+        });
+    }]);
+
+    Login.factory('loginView', 
+        ['sidePanelService', function (sidePanelService) {
+        return function lgoinView() {
+            var loginModal = sidePanelService.open({
+                templateUrl: 'scripts/security/login.html',
+                controller: 'LoginController',
+                controllerAs: 'loginController'
+            });
+            return {
+                close: function () {
+                    loginModal.close();
+                }
+            };
+        };
+    }]);
+
+    Login.controller('LoginControllerView', ['loginView', function (loginView) {
+        loginView();
+    }]);
+
+    Login.controller('LoginController', 
+        ['$state', '$modalInstance', '$log', 'authService', '$facebook', '$http',
+        function ($state, $modalInstance, $log, authService, $facebook, $http) {
+    
+        var login = this;
+        
+        login.invalidLogin = false;
+        login.credentials = { username: '', password: '' };
+    
+        login.loginFacebook = function() {
+            authService.facebookLogin()
+                .then(function () {
+                    $modalInstance.close();
+                });
+        };
+
+    }]);
+
+} ());
+(function () {
+	'use strict';
+
+	var Profile = angular.module('profile', []);
+
+	Profile.config(['$stateProvider', function ($stateProvider) {
+        $stateProvider.state('profile', {
+        	parent: 'layout',
+            url: '/profile',
+            controller: 'ProfileController',
+            controllerAs: 'profile',
+            templateUrl: 'scripts/profile/profile.html',
+            data: {
+            	loggedIn: true
+            }
+        });
+    }]);
+
+    Profile.controller('ProfileController', ['identityService', 
+    	function (identityService) {
+    		var profile = this;
+    		profile.identity = identityService.getUserIdentity();
+    		profile.avatarUrlHeader = 'http://graph.facebook.com/' + profile.identity.id + '/picture?widht=150&height=150';
+    		profile.avatarUrl = 'http://graph.facebook.com/' + profile.identity.id + '/picture?widht=200&height=200';
+    }]);
 }());

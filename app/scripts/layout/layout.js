@@ -3,7 +3,8 @@
 
 	var Layout = angular.module('layout', []);
 
-	Layout.controller('LayoutController', ['$state', function ($state) {
+	Layout.controller('LayoutController', ['$state', 'authService', 
+        function ($state, authService) {
 		var layout = this;
 
         layout.itemEntry = itemEntryCollection;
@@ -36,6 +37,10 @@
             layout.highRaise = !layout.highRaise;
             layout.itemsVisble = false;
             layout.navBgWrapper = false;
+        };
+
+        layout.logout = function () {
+            authService.facebookLogout();
         };
                 
 	}]);

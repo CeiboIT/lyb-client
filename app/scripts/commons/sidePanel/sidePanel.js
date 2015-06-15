@@ -14,7 +14,7 @@
 				backdropClass: 'lightouts'
 			};
 			angular.extend(defaultOptions, options);
-			$modal.open(defaultOptions);
+			return $modal.open(defaultOptions);
         };
         
 	    return sidePanel;

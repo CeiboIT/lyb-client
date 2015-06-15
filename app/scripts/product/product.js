@@ -9,19 +9,6 @@
 		loadTemplate('scripts/product/product_list_item.html', 'product_list_item');
 	}]);
 
-	Product.factory('productActions', ['$log', function ($log) {
-		var actions = {};
-		
-		actions.likeIt = function (product) {
-			$log.debug('likeIt > ' + JSON.stringify(product));
-		};
-
-		actions.shareIt = function (product) {
-			$log.debug('shareIt > ' + JSON.stringify(product));
-		};
-
-	}]);
-
 	Product.controller('ProductDetailController', 
 		['$log', '$modalInstance', 'product', function ($log, $modalInstance, product) {
 		var controller = this;
@@ -55,30 +42,43 @@
 		};
 	}]);
 
-	Product.factory('productService', ['$log', 'restConfig', function($log, restConfig) {
+	Product.factory('productService', ['$log', 'restConfig', 'authService',
+		function($log, restConfig) {
 		var service = restConfig.getRestForEntity('products');
-		var productService = {
+		var productService = { // only provide a subset of operations
 			getAll: function () {
 				return service.getList();
+			},
+			likeIt: function (product) {
+				product.post('like');
+			},
+			shareIt: function (product) {
+				$log.debug('shareIt > ' + JSON.stringify(product));
 			}
 		};
 		return productService;
 	}]);
 
+	Product.controller('productViewController', ['productViewService', 'productService',
+		function (productViewService, productService) {
+			var productViewController = this;
+			productViewController.openProduct = function (product) {
+				productViewService(product);
+			};
+			productViewController.likeIt = function (product) {
+	            productService.likeIt(product);
+	        };
+	}]);
+
 	Product.directive('productView', 
-		['$templateCache', 'productViewService', function ($templateCache, productViewService) {
+		['$templateCache', 'productViewService', function ($templateCache) {
 		return {
 			restrict: 'E',
 			scope: {
 				product: '='
 			},
 			template: $templateCache.get('product_list_item'),
-			controller: function() {
-				var controller = this;
-				controller.openProduct = function (product) {
-					productViewService(product);
-				};
-			},
+			controller: 'productViewController',
 			controllerAs: 'productController'
 		};
 	}]);

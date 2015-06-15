@@ -5,12 +5,16 @@
 	 angular
 		.module('lybApp', 
 			['ui.router', 'ui.bootstrap', 'lyb.home', 'product', 'layout', 'helper',
-			'sidePanel', 'ceiboIT.restServices' ])
+			'sidePanel', 'ceibo.auth', 'ceibo.login', 'ceiboIT.restServices', 'profile', 
+			'ngFacebook'])
 
-		.config(['$urlRouterProvider', '$stateProvider', 'restConfigProvider',
-			function($urlRouterProvider, $stateProvider, restConfigProvider) {
+		.config(['$urlRouterProvider', '$stateProvider', 'restConfigProvider', '$httpProvider',
+			function($urlRouterProvider, $stateProvider, restConfigProvider, $httpProvider) {
 			
 			restConfigProvider.setBaseUrl('/api');
+			// $httpProvider.interceptors.push('responseErrorInterceptor');
+			$httpProvider.defaults.withCredentials = true;
+    		$httpProvider.interceptors.push('authInterceptor');
 
 			$urlRouterProvider.otherwise('/');
 
@@ -21,23 +25,9 @@
 					controller: 'LayoutController',
 					controllerAs: 'layout'
 				})
-				.state('home' , {
-					parent: 'layout',
-					url: '/',
-					templateUrl: 'scripts/home/home.html',
-					controller:  'HomeController',
-					controllerAs: 'homeController'
-				})
 				.state('view' , {
-					// parent: 'layout',
 					url: '/view',
 					templateUrl: 'templates/view.html',
-				})
-				.state('profile' , {
-					parent: 'layout',
-					url: '/profile',
-					templateUrl: 'templates/profile.html'
-					//controller:  'footerCtrl'
 				})
 				.state('following' , {
 					parent: 'layout',

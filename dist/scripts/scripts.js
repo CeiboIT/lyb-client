@@ -487,16 +487,7 @@ var itemEntryCollection = [
                     $window.sessionStorage.removeItem('lyb.identity');
                 },
                 getUserIdentity: function () {
-                    // recupera la identity del user, si no, lanza un reject para ser manejado por el caller.
-                    // Devuelve una promise por si hay que re-loginiar al user.
-                    // var deferred = $q.defer();
                     return identity || this.restoreUser();
-                    // if (identity) {
-                    //     deferred.resolve(identity);
-                    // } else {
-                    //     deferred.reject({ error: 'Not logged user'});
-                    // }
-                    // return deferred.promise;
                 },
                 restoreUser: function () {
                     // recupera la identity del usuario desde sessionStorage.
@@ -531,14 +522,18 @@ var itemEntryCollection = [
                                     var accessToken = response.authResponse.accessToken;
                                     $http.defaults.headers.common['access_token'] = accessToken;
                                     return response;
-                                }});
+                                }})
+                            .then(function () {
+                                return $http.get('/api/auth/facebook/callback');
+                            });
                         });
 
             }, 
             facebookLogout: function () {
                 $http.post('/api/auth/logout');
                 identityService.removeIdentity();
-                return $facebook.logout();
+                $facebook.logout();
+                $state.go('home');
             },
             getUser: function () {
                 var user = $window.sessionStorage.getItem('lyb.identity');
@@ -549,6 +544,7 @@ var itemEntryCollection = [
     }]);
 
     AuthService.config(["$facebookProvider", function($facebookProvider) {
+        // 822272877864083 to test in heroku
         $facebookProvider.setAppId('822272877864083');
     }]);
 
@@ -675,7 +671,7 @@ var itemEntryCollection = [
     	function (identityService) {
     		var profile = this;
     		profile.identity = identityService.getUserIdentity();
-    		profile.avatarUrlHeader = 'http://graph.facebook.com/' + profile.identity.id + '/picture?widht=150&height=150';
-    		profile.avatarUrl = 'http://graph.facebook.com/' + profile.identity.id + '/picture?widht=200&height=200';
+    		profile.avatarUrlHeader = 'http://graph.facebook.com/' + profile.identity.id + '/picture?width=150&height=150';
+    		profile.avatarUrl = 'http://graph.facebook.com/' + profile.identity.id + '/picture?width=200&height=200';
     }]);
 }());

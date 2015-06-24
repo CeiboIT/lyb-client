@@ -20,7 +20,7 @@
     	function (identityService) {
     		var profile = this;
     		profile.identity = identityService.getUserIdentity();
-    		profile.avatarUrlHeader = 'http://graph.facebook.com/' + profile.identity.id + '/picture?widht=150&height=150';
-    		profile.avatarUrl = 'http://graph.facebook.com/' + profile.identity.id + '/picture?widht=200&height=200';
+    		profile.avatarUrlHeader = 'http://graph.facebook.com/' + profile.identity.id + '/picture?width=150&height=150';
+    		profile.avatarUrl = 'http://graph.facebook.com/' + profile.identity.id + '/picture?width=200&height=200';
     }]);
 }());

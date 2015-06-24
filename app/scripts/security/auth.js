@@ -44,16 +44,7 @@
                     $window.sessionStorage.removeItem('lyb.identity');
                 },
                 getUserIdentity: function () {
-                    // recupera la identity del user, si no, lanza un reject para ser manejado por el caller.
-                    // Devuelve una promise por si hay que re-loginiar al user.
-                    // var deferred = $q.defer();
                     return identity || this.restoreUser();
-                    // if (identity) {
-                    //     deferred.resolve(identity);
-                    // } else {
-                    //     deferred.reject({ error: 'Not logged user'});
-                    // }
-                    // return deferred.promise;
                 },
                 restoreUser: function () {
                     // recupera la identity del usuario desde sessionStorage.
@@ -88,14 +79,18 @@
                                     var accessToken = response.authResponse.accessToken;
                                     $http.defaults.headers.common['access_token'] = accessToken;
                                     return response;
-                                }});
+                                }})
+                            .then(function () {
+                                return $http.get('/api/auth/facebook/callback');
+                            });
                         });
 
             }, 
             facebookLogout: function () {
                 $http.post('/api/auth/logout');
                 identityService.removeIdentity();
-                return $facebook.logout();
+                $facebook.logout();
+                $state.go('home');
             },
             getUser: function () {
                 var user = $window.sessionStorage.getItem('lyb.identity');
@@ -106,7 +101,7 @@
     }]);
 
     AuthService.config(function($facebookProvider) {
-        $facebookProvider.setAppId('822272877864083');
+        $facebookProvider.setAppId('823739627717408'); // test app
     });
 
     AuthService.run([function() {

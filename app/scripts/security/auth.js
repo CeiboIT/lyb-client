@@ -101,7 +101,8 @@
     }]);
 
     AuthService.config(function($facebookProvider) {
-        $facebookProvider.setAppId('823739627717408'); // test app
+        // 822272877864083 to test in heroku
+        $facebookProvider.setAppId('822272877864083');
     });
 
     AuthService.run([function() {
